@@ -1,29 +1,45 @@
 $(document).ready(function(){	
-		
-	var picker = function(){			
-		$('#spinner-1').spinner({min: 0});
-		$('#spinner-2').spinner({min: 0});
-		$('#spinner-3').spinner({min: 0});
-	};
+		//refresh on cookie setter syntax
+	console.log('working');
 
-	$('#sugar-val').text(Cookies.get("sugar"));
+
+	// Cookies.set('sugar', '0');
+	// Cookies.set('choclate', '0');
+	// Cookies.set('lemon', '0');
+
+	console.log(Cookies.get('sugar'));
+
+	var sugar_count = 0;
+	var chocolate_count = 0;
+	var lemon_count = 0;
+
+	//for testing -- refresh/ experiment with cookie setter syntax
+	$('#sugar-val').text(sugar_count);
+	$('#chocolate-val').text(sugar_count);
+	$('#lemon-val').text(sugar_count);
+
+	//	cookie getters
+	$('#sugar-val').text(Cookies.get('sugar'));
 	$('#chocolate-val').text(Cookies.get("chocolate"));
 	$('#lemon-val').text(Cookies.get('lemon'));
-	
 
-	$('#submit').on('click', function(){
+	$('#sugar-name').on('click', function(){
+		sugar_count = sugar_count + 1;
+		//This might be the proper syntax for cookies, but I'm not totally sure
+		Cookies.set('sugar', sugar_count);
+		$('#sugar-val').text(sugar_count);
+	});
 
-		Cookies.set("sugar", $('#spinner-1').val() );
-		Cookies.set("chocolate", $('#spinner-2').val() )
-		Cookies.set("lemon", $('#spinner-3').val() 	)
+	$('#chocolate-name').click(function(){
+		chocolate_count = chocolate_count + 1;
+		Cookies.set('chocolate', chocolate_count);
+		$('#chocolate-val').text(chocolate_count);
+	});
 
-		$('#sugar-val').text($('#spinner-1').val());
-		$('#chocolate-val').text($('#spinner-2').val());
-		$('#lemon-val').text($('#spinner-3').val());
-
-		$('#confirm').text('Your order has been saved!! Reset by clicking the clear button below!')
-
-
+	$('#lemon-name').click(function(){
+		lemon_count = lemon_count + 1;
+		Cookies.set('lemon', lemon_count);
+		$('#lemon-val').text(lemon_count);
 	});
 
 	$('#clear').click(function(){
@@ -31,11 +47,8 @@ $(document).ready(function(){
 		Cookies.expire('chocolate');
 		Cookies.expire('lemon');
 
-		$('#sugar-val').text('');
-		$('#chocolate-val').text('');
-		$('#lemon-val').text('');
+		var sugar_count = 0;
+		var chocolate_count = 0;
+		var lemon_count = 0;
 	});
-
-picker();
-
 });
